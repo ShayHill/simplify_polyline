@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Protocol, TypeVar
 
 import numpy as np
 
-if TYPE_CHECKING:
+if TYPE_CHECKING: 
     from simplify_polyline.type_hints import Vector, Vertex, Vertices
 
 _T = TypeVar("_T")

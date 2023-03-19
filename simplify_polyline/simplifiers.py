@@ -347,12 +347,13 @@ def simplify(
     verts_array, is_closed = _align_parameters(verts, is_closed)
     if is_closed:
         points = PointLList(verts_array, is_closed=True)
-        points.simplify(0)
+        points.simplify(float("inf"))
     else:
         # create a points llist with the first and last points
         endpts = np.array([verts_array[0], verts_array[-1]], dtype=float)
         points = PointLList(endpts, is_closed=False)
         points.head.bypassed = list(verts_array[1:-1])
+
     points.complexify(min_dist)
 
     simplified = [x.vert for x in points]
