@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simplify-polyline"
-version = "0.0.1"
+version = "0.0.2"
 description = "Simplify an open of closed polyline"
 authors = ["Shay Hill <shay_public@hotmail.com>"]
 license = "MIT"
@@ -23,7 +23,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.1"
+version = "0.0.2"
 tag_format = "$version"
 version_files = [
     "pyproject.toml:^version"
