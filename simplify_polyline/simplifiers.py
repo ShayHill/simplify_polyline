@@ -15,7 +15,6 @@ function.
 :created: 2022-05-04
 """
 
-
 from __future__ import annotations
 
 from bisect import insort
@@ -33,7 +32,7 @@ if TYPE_CHECKING:
 
     from simplify_polyline.type_hints import Vector, Vertex, Vertices
 
-    _Triangle = Annotated[npt.NDArray[np.float_], (3, 2)]
+    _Triangle = Annotated[npt.NDArray[np.float64], (3, 2)]
 
 
 class Point:

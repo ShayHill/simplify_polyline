@@ -10,10 +10,10 @@ import numpy as np
 import numpy.typing as npt
 
 # one polyline / polygon point
-Vertex = Annotated[npt.NDArray[np.float_], "(d,)"]
+Vertex = Annotated[npt.NDArray[np.float64], "(d,)"]
 
 # a polyline / polygon
-Vertices = Annotated[npt.NDArray[np.float_], "(-1, d)"]
+Vertices = Annotated[npt.NDArray[np.float64], "(-1, d)"]
 
 # numpy equivalent of a list of floats
-Vector = Annotated[npt.NDArray[np.float_], (-1,)]
+Vector = Annotated[npt.NDArray[np.float64], (-1,)]
