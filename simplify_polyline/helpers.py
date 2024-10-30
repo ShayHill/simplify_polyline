@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Protocol, TypeVar
 
 import numpy as np
 
-if TYPE_CHECKING: 
+if TYPE_CHECKING:
     from simplify_polyline.type_hints import Vector, Vertex, Vertices
 
 _T = TypeVar("_T")
@@ -20,8 +20,7 @@ _T = TypeVar("_T")
 class Comparable(Protocol):
     """Protocol for annotating comparable types."""
 
-    def __lt__(self: _T, other: _T) -> bool:
-        ...
+    def __lt__(self: _T, other: _T) -> bool: ...
 
 
 _ComparableT = TypeVar("_ComparableT", bound=Comparable)
@@ -66,7 +65,8 @@ def get_line_seg_dists(points: Vertices, seg_a: Vertex, seg_b: Vertex) -> Vector
     h = np.maximum.reduce([s, t, np.zeros(len(points))])
 
     # perpendicular distance component
-    c = np.cross(points - seg_a, d)
+    points_min_seg_a = points - seg_a
+    c = points_min_seg_a[:, 0] * d[1] - points_min_seg_a[:, 1] * d[0]
 
     # use hypot for Pythagoras to improve accuracy
     return np.hypot(h, c)
