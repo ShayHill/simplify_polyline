@@ -1,23 +1,31 @@
 ci:
+  skip: [pyright]
 
-  autofix_commit_msg: 'style: pre-commit fixes'
-  autoupdate_commit_msg: 'chore: update pre-commit hooks'
+exclude: "tests"
 
-exclude: tests
 repos:
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0
+  rev: v5.0.0
   hooks:
     - id: check-added-large-files
     - id: check-ast
     - id: check-case-conflict
+    - id: check-docstring-first
+    - id: check-executables-have-shebangs
+    - id: check-json
     - id: check-merge-conflict
+      args:
+        - --assume-in-merge
+    - id: check-shebang-scripts-are-executable
     - id: check-symlinks
-    - id: check-yaml
     - id: check-toml
+    - id: check-vcs-permalinks
     - id: check-xml
+    - id: check-yaml
     - id: debug-statements
+    - id: destroyed-symlinks
+    # - id: detect-aws-credentials
     - id: detect-private-key
     - id: end-of-file-fixer
     - id: mixed-line-ending
@@ -29,14 +37,19 @@ repos:
     - id: name-tests-test
       args:
       - --pytest-test-first
+    - id: no-commit-to-branch
+    - id: pretty-format-json
+      args: ['--autofix']
+    # - id: sort-simple-yaml
+        # files: .pre-commit-config.yaml
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v0.991
+  rev: v1.13.0
   hooks:
   - id: mypy
     name: mypy
     language: python
-    language_version: python 3.11
+    language_version: python 3.13
     types: [python]
     require_serial: true
     verbose: true
@@ -47,27 +60,27 @@ repos:
     # files: ^(src/|tests/)
 
 - repo: https://github.com/PyCQA/isort
-  rev: 5.12.0
+  rev: 5.13.2
   hooks:
   - id: isort
-    args: ["--profile", "black", "--filter-files", "--combine-as"]
+    args: ["--profile", "black", "--filter-files", "--combine-as", "honor--noqa"]
 
 - repo: https://github.com/psf/black
-  rev: 22.12.0
+  rev: 24.10.0
   hooks:
   - id: black
     language_version: python3.10
     args: ["--skip-magic-trailing-comma"]
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.3.1
+  rev: v3.19.0
   hooks:
   - args:
     - --py310-plus
     id: pyupgrade
 
 - repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.4.2
+  rev: v1.5.5
   hooks:
   - id: remove-tabs
 
@@ -76,18 +89,31 @@ repos:
 #   hooks:
 #   - id: commitizen
 
-# - repo: https://github.com/pre-commit/mirrors-pylint
-#   rev: v3.0.0a5
+# # This will only work with pylint installed in the venv
+# - repo: local
 #   hooks:
 #   - id: pylint
 #     exclude: "tests"
 #     name: pylint
+#     entry: ./venv/Scripts/pylint.exe
+#     language: system
+#     types: [python]
 #     args:
+#     - --ignore-patterns=venv
 #     - --good-names=i,j,_,f
-#     - --disable=protected-access
-#     - --disable=no-member
-#     - --disable=import-error
-#     - --disable=no-name-in-module
+#     # - --disable=protected-access
+#     # - --disable=no-member
+#     # - --disable=import-error
+#     # - --disable=no-name-in-module
+#     - --disable=redundant-returns-doc # many false positives
+#     - --disable=too-many-arguments
+#     - --disable=too-many-instance-attributes
+#     - --disable=redefined-builtin # sticking with edge.next
+#     - --disable=invalid-name # for _TMeshElem and similar type hints
+#     - --disable=useless-return # conflicts with mypy
+#     - --disable=assignment-from-no-return # prevents overloading Attrib methods to only raise an Exception
+#     - --disable=useless-parent-delegation
+#     - --disable=R0801 # Similar lines in multiple files
 #     - --load-plugins=pylint.extensions.docparams
 #     - --accept-no-param-doc=n
 #     - --accept-no-raise-doc=n
@@ -122,6 +148,6 @@ repos:
 
 # reads pyproject.toml for additional config
 - repo: https://github.com/RobertCraigie/pyright-python
-  rev: v1.1.291
+  rev: v1.1.386
   hooks:
     - id: pyright
