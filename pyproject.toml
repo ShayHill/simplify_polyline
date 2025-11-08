@@ -8,7 +8,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = ["numpy"]
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = ["commitizen", "pre-commit", "pytest", "tox"]
 
 [build-system]
@@ -30,16 +30,6 @@ profile = "black"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
-
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = py{39,310,311,312,313}
-
-[testenv]
-deps = pytest
-commands = pytest
-"""
 
 
 [tool.pyright]

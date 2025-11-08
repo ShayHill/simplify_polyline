@@ -6,7 +6,7 @@ exclude: "tests"
 repos:
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
     - id: check-added-large-files
     - id: check-ast
@@ -44,7 +44,7 @@ repos:
         # files: .pre-commit-config.yaml
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.13.0
+  rev: v1.18.2
   hooks:
   - id: mypy
     name: mypy
@@ -60,20 +60,20 @@ repos:
     # files: ^(src/|tests/)
 
 - repo: https://github.com/PyCQA/isort
-  rev: 5.13.2
+  rev: 7.0.0
   hooks:
   - id: isort
     args: ["--profile", "black", "--filter-files", "--combine-as", "honor--noqa"]
 
 - repo: https://github.com/psf/black
-  rev: 24.10.0
+  rev: 25.9.0
   hooks:
   - id: black
     language_version: python3.10
     args: ["--skip-magic-trailing-comma"]
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.19.0
+  rev: v3.21.0
   hooks:
   - args:
     - --py310-plus
@@ -137,7 +137,7 @@ repos:
   # PGH003 Use specific rule codes when ignoring type issues
   # PLR0913 Too many arguments to function call
   # PTH108 os.unlink should be replaced by .unlink()
-  rev: 'v0.7.1'
+  rev: 'v0.14.4'
   hooks:
     - id: ruff
       exclude: "tests"
@@ -148,6 +148,6 @@ repos:
 
 # reads pyproject.toml for additional config
 - repo: https://github.com/RobertCraigie/pyright-python
-  rev: v1.1.382.post0
+  rev: v1.1.407
   hooks:
     - id: pyright
